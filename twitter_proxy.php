@@ -51,8 +51,9 @@ class TwitterProxy {
 	private function buildAuthorizationHeader($oauth) {
 		$r = 'Authorization: OAuth ';
 		$values = [];
-		foreach($oauth as $key=>$value)
-		$values[] = "$key=\"" . rawurlencode($value) . "\"";
+		foreach($oauth as $key => $value) {
+			$values[] = "$key=\"" . rawurlencode($value) . "\"";
+		}
 		$r .= implode(', ', $values);
 
 		return $r;
