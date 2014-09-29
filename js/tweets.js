@@ -6,15 +6,14 @@ $(function(){
 		success: function(response) {
 
 			if (typeof response.errors === 'undefined' || response.errors.length < 1) {
-				if (typeof $('.tweets-container') !== 'undefined') {
+				
+				var $tweets = $('<ul></ul>');
+				$.each(response, function(i, obj) {
+					$tweets.append('<li>' + obj.text + '</li>');
+				});
 
-					var $tweets = $('<ul></ul>');
-					$.each(response, function(i, obj) {
-						$tweets.append('<li>' + obj.text + '</li>');
-					});
+				$('.tweets-container').html($tweets);
 
-					$('.tweets-container').html($tweets);
-				}
 			} else {
 				$('.tweets-container p:first').text('Response error');
 			}
