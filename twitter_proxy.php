@@ -67,7 +67,7 @@ class TwitterProxy {
 			die('URL is not authorised');
 		}
 		 
-		// Figure out the URL parmaters
+		// Figure out the URL parameters
 		$url_parts = parse_url($url);
 		parse_str($url_parts['query'], $url_arguments);
 		 

@@ -3,10 +3,10 @@
 require_once('twitter_proxy.php');
 
 // Twitter OAuth Config options
-$oauth_access_token = 'your-token-here';
-$oauth_access_token_secret = 'your-token-secret';
-$consumer_key = 'your-api-key';
-$consumer_secret = 'your-api-secret';
+$oauth_access_token = '***REMOVED***';
+$oauth_access_token_secret = '***REMOVED***';
+$consumer_key = '***REMOVED***';
+$consumer_secret = '***REMOVED***';
 $user_id = '78884300';
 $screen_name = 'parallax';
 $count = 5;
