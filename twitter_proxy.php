@@ -25,8 +25,8 @@ class TwitterProxy {
 	/**
 	 *	@param	string	$oauth_access_token			OAuth Access Token			('Access token' on https://apps.twitter.com)
 	 *	@param	string	$oauth_access_token_secret	OAuth Access Token Secret	('Access token secret' on https://apps.twitter.com)
-	 *	@param	string	$consumer_key				OAuth Access Token			('API key' on https://apps.twitter.com)
-	 *	@param	string	$consumer_secret			OAuth Access Token			('API secret' on https://apps.twitter.com)
+	 *	@param	string	$consumer_key				Consumer key				('API key' on https://apps.twitter.com)
+	 *	@param	string	$consumer_secret			Consumer secret				('API secret' on https://apps.twitter.com)
 	 *	@param	string	$user_id					User id (http://gettwitterid.com/)
 	 *	@param	string	$screen_name				Twitter handle
 	 *	@param	string	$count						The number of tweets to pull out
@@ -71,10 +71,10 @@ class TwitterProxy {
 		$url_parts = parse_url($url);
 		parse_str($url_parts['query'], $url_arguments);
 		 
-		$full_url = $this->config['base_url'] . $url; // Url with the query on it.
-		$base_url = $this->config['base_url'] . $url_parts['path']; // Url without the query.
+		$full_url = $this->config['base_url'] . $url; // URL with the query on it
+		$base_url = $this->config['base_url'] . $url_parts['path']; // URL without the query
 		 
-		// Set up the oauth Authorization array
+		// Set up the OAuth Authorization array
 		$oauth = [
 			'oauth_consumer_key' => $this->config['consumer_key'],
 			'oauth_nonce' => time(),
@@ -83,11 +83,12 @@ class TwitterProxy {
 			'oauth_timestamp' => time(),
 			'oauth_version' => '1.0'
 		];
-			
+
 		$base_info = $this->buildBaseString($base_url, 'GET', array_merge($oauth, $url_arguments));
+		
 		$composite_key = rawurlencode($this->config['consumer_secret']) . '&' . rawurlencode($this->config['oauth_access_token_secret']);
-		$oauth_signature = base64_encode(hash_hmac('sha1', $base_info, $composite_key, true));
-		$oauth['oauth_signature'] = $oauth_signature;
+
+		$oauth['oauth_signature'] = base64_encode(hash_hmac('sha1', $base_info, $composite_key, true));
 		 
 		// Make Requests
 		$header = [
